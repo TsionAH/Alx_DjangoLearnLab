@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from .models import Book
+from bookshelf.models import Book, Author, Library, Librarian
+
 from django.views.generic import DetailView
-from .models import Library
+
 from django.contrib.auth.decorators import user_passes_test
 class LibraryDetailView(DetailView):
     model = Library
