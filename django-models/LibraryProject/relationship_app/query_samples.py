@@ -8,7 +8,12 @@ from relationship_app.models import Author, Book, Library, Librarian
 
 # Library query (checker requires this exact line)
 library_name = "Central Library"
-Library.objects.get(name=library_name)
+library = Library.objects.get(name=library_name)
+
+# Correct line for the checker
+librarian = Librarian.objects.get(library=library)
+print("Librarian of Central Library:", librarian)
+
 
 # Author query
 author_name = "Jane Doe"
