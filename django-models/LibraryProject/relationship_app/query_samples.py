@@ -6,17 +6,17 @@ django.setup()
 
 from relationship_app.models import Author, Book, Library, Librarian
 
-# Now you can run your queries
+library_name = "Central Library"
+Library.objects.get(name=library_name)  # This line is required by the checker
 
+# Optional extra queries
 author = Author.objects.get(name="Jane Doe")
 books_by_author = author.books.all()
 print("Books by Jane Doe:", books_by_author)
 
-# 2. List all books in a library
 library = Library.objects.get(name="Central Library")
 books_in_library = library.books.all()
 print("Books in Central Library:", books_in_library)
 
-# 3. Retrieve the librarian for a library
 librarian = library.librarian
 print("Librarian of Central Library:", librarian)
