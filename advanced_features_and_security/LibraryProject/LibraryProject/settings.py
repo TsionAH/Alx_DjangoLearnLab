@@ -31,6 +31,7 @@ X_FRAME_OPTIONS = 'DENY'                   # Prevent clickjacking
 SECURE_CONTENT_TYPE_NOSNIFF = True        # Prevent MIME type sniffing
 
 # Cookies security
+SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True                  # CSRF cookies over HTTPS only
 SESSION_COOKIE_SECURE = True               # Session cookies over HTTPS only
 
