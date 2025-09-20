@@ -26,6 +26,18 @@ SECRET_KEY = 'django-insecure-440ww1a=)0qcx$2n0^*#jj9_5g)_-lh3f15bk3=xqzl()6rd1-
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SECURE_BROWSER_XSS_FILTER = True           # Prevents some XSS attacks
+X_FRAME_OPTIONS = 'DENY'                   # Prevent clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True        # Prevent MIME type sniffing
+
+# Cookies security
+CSRF_COOKIE_SECURE = True                  # CSRF cookies over HTTPS only
+SESSION_COOKIE_SECURE = True               # Session cookies over HTTPS only
+
+# Optional: HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000             # Enforce HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 
 # Application definition

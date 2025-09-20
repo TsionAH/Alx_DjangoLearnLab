@@ -1,0 +1,7 @@
+<!-- bookshelf/templates/bookshelf/form_example.html -->
+<form method="post">
+    {% csrf_token %}
+    <!-- form fields -->
+    <input type="text" name="title" placeholder="Book Title">
+    <button type="submit">Submit</button>
+</form>
