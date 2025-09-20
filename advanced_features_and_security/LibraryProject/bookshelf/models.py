@@ -3,6 +3,7 @@
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
+from django.contrib.auth.models import Permission
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -42,3 +43,15 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+# about permissions
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    class Meta:
+        permissions = [
+            ("can_view", "Can view"),
+            ("can_edit", "Can edit "),
+            ("can_delete", "Can delete "),
+        ]
+        def __str__(self):
+            return self.title
