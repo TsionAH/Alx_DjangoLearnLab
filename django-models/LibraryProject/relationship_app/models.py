@@ -1,13 +1,18 @@
+# relationship_app/models.py
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+
 # Author model
 class Author(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
 
 # Book model
 class Book(models.Model):
@@ -17,6 +22,14 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        permissions = [
+            ("can_add_book", "Can add a book"),
+            ("can_change_book", "Can edit a book"),
+            ("can_delete_book", "Can delete a book"),
+        ]
+
+
 # Library model
 class Library(models.Model):
     name = models.CharField(max_length=100)
@@ -24,6 +37,7 @@ class Library(models.Model):
 
     def __str__(self):
         return self.name
+
 
 # Librarian model
 class Librarian(models.Model):
@@ -33,7 +47,8 @@ class Librarian(models.Model):
     def __str__(self):
         return self.name
 
-# Create your models here.
+
+# User Profile model
 class UserProfile(models.Model):
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
@@ -46,11 +61,13 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.role}"
 
+
 # Signal to automatically create UserProfile when User is created
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
+
 
 # Signal to save profile when user is saved
 @receiver(post_save, sender=User)
