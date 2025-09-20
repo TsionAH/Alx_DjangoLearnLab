@@ -49,6 +49,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     class Meta:
         permissions = [
+            ("can_create", "Can create"),
             ("can_view", "Can view"),
             ("can_edit", "Can edit "),
             ("can_delete", "Can delete "),
