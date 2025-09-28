@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 # Create your views here.
+# ✅ Add this import for filtering support
+from django_filters import rest_framework as filters
 from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
@@ -29,7 +31,9 @@ class BookListView(generics.ListAPIView):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly] 
      # anyone can read
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filter_backends = [filters.DjangoFilterBackend,
+                       generics.filters.SearchFilter,
+                       generics.filters.OrderingFilter]
   # enables filtering
     filterset_fields = ['title', 'author', 'publication_year'] 
     search_fields = ['title', 'author__name']
