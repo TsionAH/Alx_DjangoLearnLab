@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from rest_framework import generics
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -17,3 +17,21 @@ class AuthorListView(APIView):
         authors = Author.objects.all()
         serializer = AuthorSerializer(authors, many=True)
         return Response(serializer.data)
+class BookListView(generics.ListAPIView):
+    queryset = Book.objects.all()
+class BookDetailView(generics.RetrieveAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookCreateView(generics.CreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookUpdateView(generics.UpdateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookDeleteView(generics.DestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
