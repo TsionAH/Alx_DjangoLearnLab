@@ -10,7 +10,14 @@ from .models import Profile, Post
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from datetime import date
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
 
+    class Meta:
+        model = User
+        fields = ["username", "email", "password1", "password2"]
 def blog_home(request):
     return render(request, "home.html")
 class MyLoginView(LoginView):
